@@ -19,10 +19,6 @@ define(function(require) {
           + '</form>';
     },
 
-    childViewOptions: {
-      state: store.getState()
-    },
-
     ui: {
       form: 'form',
       input: 'input'

@@ -15,19 +15,6 @@ define(function(require) {
       return props.text;
     },
 
-    attributes: function() {
-
-      var textDecoration = this.styles.default.textDecoration;
-
-      if (this.model.get('completed')) {
-        textDecoration = this.styles.completed.textDecoration;
-      }
-
-      return {
-        style: 'text-decoration: ' + textDecoration
-      }
-    },
-
     styles: {
       default: {
         textDecoration: 'none'
@@ -38,10 +25,10 @@ define(function(require) {
     },
 
     modelEvents: {
-      'change:completed': 'onChangeCompleted'
+      'change': 'render'
     },
 
-    onChangeCompleted: function() {
+    onRender: function() {
 
       var styles = this.styles.default;
       var isCompleted = this.model.get('completed');
@@ -67,12 +54,7 @@ define(function(require) {
 
     childView: Todo,
 
-    tagName: 'ul',
-
-    childViewOptions: {
-      state: store.getState()
-    }
-
+    tagName: 'ul'
   });
 
   return new TodoList({

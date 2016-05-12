@@ -22,10 +22,6 @@ define(function(require) {
       TodoList: '#TodoList'
     },
 
-    childViewOptions: {
-      state: store.getState()
-    },
-
     showAddTodo: function() {
       this.showChildView('AddTodo', AddTodo);
     },
