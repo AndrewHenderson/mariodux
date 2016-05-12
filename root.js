@@ -26,10 +26,6 @@ define(function(require) {
       Footer: '#Footer'
     },
 
-    initialize: function() {
-      store.subscribe(this.render);
-    },
-
     onRender: function() {
 
       var todos = store.getState().todos;
