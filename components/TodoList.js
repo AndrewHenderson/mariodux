@@ -16,7 +16,7 @@ define(function(require) {
     },
 
     styles: {
-      default: {
+      'default': {
         textDecoration: 'none'
       },
       completed: {
@@ -28,7 +28,7 @@ define(function(require) {
       'change': 'render'
     },
 
-    onRender: function() {
+    setStyles: function() {
 
       var styles = this.styles.default;
       var isCompleted = this.model.get('completed');
@@ -38,6 +38,10 @@ define(function(require) {
       }
 
       this.$el.css(styles);
+    },
+
+    onRender: function() {
+      this.setStyles();
     },
 
     events: {

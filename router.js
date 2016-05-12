@@ -9,9 +9,8 @@ define(function(require) {
       '': 'default'
     },
 
-    default: function () {
-      root.showAddTodo();
-      root.showTodoList();
+    'default': function () {
+      // Nothing here
     }
   });
 });

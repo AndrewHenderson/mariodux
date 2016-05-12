@@ -6,6 +6,7 @@ define(function(require) {
   var store = require('store');
   var AddTodo = require('containers/AddTodo');
   var TodoList = require('components/TodoList');
+  var Footer = require('components/Footer');
 
   window.store = store; // FOR DEMO ONLY
 
@@ -15,21 +16,20 @@ define(function(require) {
 
       return '<div id="AddTodo"></div>'
           + '<div id="TodoList"></div>'
+          + '<div id="Footer"></div>'
     },
 
     regions: {
       AddTodo: '#AddTodo',
-      TodoList: '#TodoList'
+      TodoList: '#TodoList',
+      Footer: '#Footer'
     },
 
-    showAddTodo: function() {
+    onRender: function() {
       this.showChildView('AddTodo', AddTodo);
-    },
-
-    showTodoList: function() {
       this.showChildView('TodoList', TodoList);
+      this.showChildView('Footer', Footer);
     }
-
   });
 
   return new View();

@@ -4,9 +4,11 @@ define(function(require) {
 
   var combineReducers = require('redux').combineReducers;
   var todos = require('./todos');
+  var visibilityFilter = require('./visibilityFilter');
 
   return combineReducers({
-    todos: todos
+    todos: todos,
+    visibilityFilter: visibilityFilter
   });
 
 });

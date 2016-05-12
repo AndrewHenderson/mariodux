@@ -3,7 +3,25 @@ define(function(require) {
   'use strict';
 
   var Backbone = require('backbone');
-  var TodosCollection = new Backbone.Collection([]);
+
+  var TodosCollection = Backbone.Collection.extend({
+
+    getVisibleTodos: function(collection, filter) {
+
+      collection = this;
+
+      switch (filter) {
+        case 'SHOW_ALL':
+          return collection;
+        case 'SHOW_COMPLETED':
+          return collection.filter({ completed: true });
+        case 'SHOW_ACTIVE':
+          return collection.filter({ completed: false });
+      }
+    }
+  });
+
+  var todosCollection = new TodosCollection([]);
 
   function todo(model, action) {
 
@@ -21,7 +39,7 @@ define(function(require) {
 
   return function todos(collection, action) {
 
-    collection = TodosCollection;
+    collection = todosCollection;
 
     switch (action.type) {
 
