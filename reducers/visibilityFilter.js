@@ -2,9 +2,11 @@ define(function() {
 
   'use strict';
 
+  var defaultState = 'SHOW_ALL';
+
   return function visibilityFilter(state, action) {
 
-    state = 'SHOW_ALL';
+    state = state || defaultState;
 
     switch (action.type) {
       case 'SET_VISIBILITY_FILTER':

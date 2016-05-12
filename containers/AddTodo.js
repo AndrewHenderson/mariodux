@@ -28,10 +28,20 @@ define(function(require) {
       'submit @ui.form': 'onSubmitForm'
     },
 
+    initialize: function(options) {
+      if (options.value) {
+        this.value = options.value;
+      }
+    },
+
+    onRender: function() {
+      this.ui.input.val(this.value);
+    },
+
     onSubmitForm: function(e) {
       e.preventDefault();
       dispatch(addTodo(this.ui.input.val().trim()));
-      //this.ui.input.val('');
+      this.ui.input.val('');
     }
 
   });

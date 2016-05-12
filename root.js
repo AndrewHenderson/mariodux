@@ -26,17 +26,36 @@ define(function(require) {
       Footer: '#Footer'
     },
 
-    onRender: function() {
+    initialize: function(options) {
+      if (options.root) {
+        this.root = options.root;
+      }
+    },
+
+    showChildViews: function() {
 
       var todos = store.getState().todos;
       var visibilityFilter = store.getState().visibilityFilter;
       var visibleTodos = todos.getVisibleTodos(undefined, visibilityFilter);
+      var AddTodoOptions;
 
-      this.showChildView('AddTodo', new AddTodo());
+      if (this.root && this.root.getChildView('AddTodo')) {
+        AddTodoOptions = {
+          value: this.root.getChildView('AddTodo').ui.input.val()
+        }
+      }
+
+      this.showChildView('AddTodo', new AddTodo(AddTodoOptions));
       this.showChildView('TodoList', new TodoList({
         collection: new Backbone.Collection(visibleTodos)
       }));
       this.showChildView('Footer', new Footer());
+
+      return this;
+    },
+
+    onRender: function() {
+      this.showChildViews();
     }
   });
 });
