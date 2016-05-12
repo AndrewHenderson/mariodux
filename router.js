@@ -1,16 +1,18 @@
 define(function(require) {
 
   var Backbone = require('backbone');
-  var root = require('root');
+  var store = require('store');
+  var dispatch = store.dispatch;
+  var setVisibilityFilter = require('actions/index').setVisibilityFilter;
 
   return Backbone.Router.extend({
 
     routes: {
-      '': 'default'
+      ':filter': 'filter'
     },
 
-    'default': function () {
-      // Nothing here
+    filter: function (filter) {
+      dispatch(setVisibilityFilter(filter));
     }
   });
 });

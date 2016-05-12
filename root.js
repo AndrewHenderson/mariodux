@@ -11,7 +11,7 @@ define(function(require) {
 
   window.store = store; // FOR DEMO ONLY
 
-  var View = Marionette.LayoutView.extend({
+  return Marionette.LayoutView.extend({
 
     template: function() {
 
@@ -43,7 +43,4 @@ define(function(require) {
       this.showChildView('Footer', new Footer());
     }
   });
-
-  return new View();
-
 });

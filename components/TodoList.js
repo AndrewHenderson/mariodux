@@ -24,10 +24,6 @@ define(function(require) {
       }
     },
 
-    modelEvents: {
-      'change': 'render'
-    },
-
     setStyles: function() {
 
       var styles = this.styles.default;

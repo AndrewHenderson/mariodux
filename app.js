@@ -6,7 +6,8 @@ define(function(require) {
   var Marionette = require('marionette');
   var Handlebars = require('handlebars');
   var Router = require('router');
-  var root = require('root');
+  var Root = require('root');
+  var root = new Root();
 
   var app;
   var router;
