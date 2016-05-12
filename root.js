@@ -7,6 +7,7 @@ define(function(require) {
   var AddTodo = require('containers/AddTodo');
   var TodoList = require('components/TodoList');
   var Footer = require('components/Footer');
+  var Backbone = require('backbone');
 
   window.store = store; // FOR DEMO ONLY
 
@@ -25,10 +26,21 @@ define(function(require) {
       Footer: '#Footer'
     },
 
+    initialize: function() {
+      store.subscribe(this.render);
+    },
+
     onRender: function() {
-      this.showChildView('AddTodo', AddTodo);
-      this.showChildView('TodoList', TodoList);
-      this.showChildView('Footer', Footer);
+
+      var todos = store.getState().todos;
+      var visibilityFilter = store.getState().visibilityFilter;
+      var visibleTodos = todos.getVisibleTodos(undefined, visibilityFilter);
+
+      this.showChildView('AddTodo', new AddTodo());
+      this.showChildView('TodoList', new TodoList({
+        collection: new Backbone.Collection(visibleTodos)
+      }));
+      this.showChildView('Footer', new Footer());
     }
   });
 

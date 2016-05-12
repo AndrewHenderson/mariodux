@@ -7,7 +7,7 @@ define(function(require) {
   var dispatch = store.dispatch;
   var addTodo = require('actions/index').addTodo;
 
-  var AddTodo = Marionette.LayoutView.extend({
+  return Marionette.LayoutView.extend({
 
     template: function() {
 
@@ -31,11 +31,8 @@ define(function(require) {
     onSubmitForm: function(e) {
       e.preventDefault();
       dispatch(addTodo(this.ui.input.val().trim()));
-      this.ui.input.val('');
+      //this.ui.input.val('');
     }
 
   });
-
-  return new AddTodo();
-
 });

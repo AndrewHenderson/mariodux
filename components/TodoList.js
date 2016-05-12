@@ -54,15 +54,10 @@ define(function(require) {
 
   });
 
-  var TodoList = Marionette.CollectionView.extend({
+  return Marionette.CollectionView.extend({
 
     childView: Todo,
 
     tagName: 'ul'
   });
-
-  return new TodoList({
-    collection: store.getState().todos
-  });
-
 });

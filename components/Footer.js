@@ -7,7 +7,7 @@ define(function(require) {
   var dispatch = store.dispatch;
   var setVisibilityFilter = require('actions/index').setVisibilityFilter;
 
-  var Footer = Marionette.LayoutView.extend({
+  return Marionette.LayoutView.extend({
 
     template: function() {
       return '<p>Show: <a data-filter="SHOW_ALL">All</a>'
@@ -29,7 +29,4 @@ define(function(require) {
       dispatch(setVisibilityFilter(filter));
     }
   });
-
-  return new Footer();
-
 });

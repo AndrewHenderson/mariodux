@@ -12,11 +12,11 @@ define(function(require) {
 
       switch (filter) {
         case 'SHOW_ALL':
-          return collection;
+          return collection.models;
         case 'SHOW_COMPLETED':
-          return collection.filter({ completed: true });
+          return collection.where({ completed: true });
         case 'SHOW_ACTIVE':
-          return collection.filter({ completed: false });
+          return collection.where({ completed: false });
       }
     }
   });
