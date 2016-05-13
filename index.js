@@ -26,7 +26,7 @@ define(function(require) {
 
         var isMorphable = !$(fromEl).is('[nomorph]');
 
-        return isMorphable; // if false DOM node will not be updated
+        return isMorphable; // if false realDOM child node will not be updated
       }
     });
   });

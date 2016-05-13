@@ -7,7 +7,7 @@ define(function(require) {
 
   return {
 
-    getVisibleCollection: function () {
+    getVisibleCollection: function() {
 
       var state = store.getState();
       var todos = state.todos;
