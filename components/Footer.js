@@ -13,8 +13,8 @@ define(function(require) {
       var visibilityFilter = state.visibilityFilter;
 
       var showAll = visibilityFilter !== 'SHOW_ALL' ? '<a href="#SHOW_ALL">All</a>' : '<span>All</span>';
-      var showActive = visibilityFilter !== 'SHOW_ACTIVE' ? '<a href="#SHOW_ACTIVE">Active</a>' : '<span>Active</span>'
-      var showCompleted = visibilityFilter !== 'SHOW_COMPLETED' ? '<a href="#SHOW_COMPLETED">Completed</a>' : '<span>Completed</span>'
+      var showActive = visibilityFilter !== 'SHOW_ACTIVE' ? '<a href="#SHOW_ACTIVE">Active</a>' : '<span>Active</span>';
+      var showCompleted = visibilityFilter !== 'SHOW_COMPLETED' ? '<a href="#SHOW_COMPLETED">Completed</a>' : '<span>Completed</span>';
 
       return '<p>Show: '
         + showAll
