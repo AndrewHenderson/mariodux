@@ -13,7 +13,7 @@ define(function(require) {
 
       return '<form class="form-inline">'
           + '<div class="form-group">'
-          + '<input class="form-control"/>'
+          + '<input ref class="form-control"/>'
           + '</div>'
           + '<button type="submit" class="btn btn-primary">Add Todo</button>'
           + '</form>';
@@ -28,20 +28,16 @@ define(function(require) {
       'submit @ui.form': 'onSubmitForm'
     },
 
-    initialize: function(options) {
-      if (options.value) {
-        this.value = options.value;
-      }
-    },
-
-    onRender: function() {
-      this.ui.input.val(this.value);
-    },
-
     onSubmitForm: function(e) {
+
+      var value = this.ui.input.val().trim();
+
       e.preventDefault();
-      dispatch(addTodo(this.ui.input.val().trim()));
-      this.ui.input.val('');
+
+      if (value) {
+        dispatch(addTodo(value));
+        this.ui.input.val('');
+      }
     }
 
   });

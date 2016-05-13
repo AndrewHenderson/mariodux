@@ -6,7 +6,6 @@
     "redux": "https://npmcdn.com/redux/dist/redux.js",
     "backbone.marionette": "marionette#~2.4.5",
     "jquery": "~2.2.3",
-    "handlebars": "~4.0.5",
     "morphdom": "^1.3.0"
   }
 }
