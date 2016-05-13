@@ -7,7 +7,7 @@ define(function(require) {
   var AddTodo = require('components/AddTodo');
   var TodoList = require('components/TodoList');
   var Footer = require('components/Footer');
-  var Backbone = require('backbone');
+  var todosContainer = require('containers/todos');
 
   window.getState = store.getState; // FOR DEMO ONLY
 
@@ -28,11 +28,7 @@ define(function(require) {
 
     showChildViews: function() {
 
-      var state = store.getState();
-      var todosCollection = state.todos;
-      var visibilityFilter = state.visibilityFilter;
-      var visibleTodos = todosCollection.getVisibleTodos(visibilityFilter);
-      var todoListCollection = new Backbone.Collection(visibleTodos);
+      var todoListCollection = todosContainer.getVisibleCollection();
 
       this.showChildView('AddTodo', new AddTodo());
       this.showChildView('TodoList', new TodoList({

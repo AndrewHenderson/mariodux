@@ -17,11 +17,16 @@ define(function(require) {
 
   store.subscribe(function updateDOM() {
 
-    morphdom(root.$el[0], virtualRoot.render().$el[0], {
+    var realDOM = root.$el[0];
+    var virtualDOM = virtualRoot.render().$el[0];
+
+    morphdom(realDOM, virtualDOM, {
 
       onBeforeElChildrenUpdated: function(fromEl, toEl) {
 
-        return !$(fromEl).is('[ref]'); // if false DOM node will not be updated
+        var isMorphable = !$(fromEl).is('[nomorph]');
+
+        return isMorphable; // if false DOM node will not be updated
       }
     });
   });
