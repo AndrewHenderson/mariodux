@@ -3,35 +3,40 @@ define(function(require) {
   'use strict';
 
   var Backbone = require('backbone');
+  var nextTodoId = 0;
 
   var TodosCollection = Backbone.Collection.extend({
 
-    getVisibleTodos: function(collection, filter) {
-
-      collection = this;
+    getVisibleTodos: function(filter) {
 
       switch (filter) {
+
         case 'SHOW_ALL':
-          return collection.models;
+          return this.models;
+
         case 'SHOW_COMPLETED':
-          return collection.where({ completed: true });
+          return this.where({ completed: true });
+
         case 'SHOW_ACTIVE':
-          return collection.where({ completed: false });
+          return this.where({ completed: false });
       }
     }
   });
 
   var todosCollection = new TodosCollection([]);
 
-  function todo(model, action) {
+  function todo(action) {
 
     switch (action.type) {
+
       case 'ADD_TODO':
+
         return {
-          id: action.id,
+          id: nextTodoId++,
           text: action.text,
           completed: false
         };
+
       default:
         return model
     }
@@ -45,7 +50,7 @@ define(function(require) {
 
       case 'ADD_TODO':
 
-        collection.add(todo(undefined, action));
+        collection.add(todo(action));
 
         return collection;
 

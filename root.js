@@ -9,7 +9,7 @@ define(function(require) {
   var Footer = require('components/Footer');
   var Backbone = require('backbone');
 
-  window.store = store; // FOR DEMO ONLY
+  window.getState = store.getState; // FOR DEMO ONLY
 
   return Marionette.LayoutView.extend({
 
@@ -28,13 +28,15 @@ define(function(require) {
 
     showChildViews: function() {
 
-      var todosCollection = store.getState().todos;
-      var visibilityFilter = store.getState().visibilityFilter;
-      var visibleTodos = todosCollection.getVisibleTodos(undefined, visibilityFilter);
+      var state = store.getState();
+      var todosCollection = state.todos;
+      var visibilityFilter = state.visibilityFilter;
+      var visibleTodos = todosCollection.getVisibleTodos(visibilityFilter);
+      var todoListCollection = new Backbone.Collection(visibleTodos);
 
       this.showChildView('AddTodo', new AddTodo());
       this.showChildView('TodoList', new TodoList({
-        collection: new Backbone.Collection(visibleTodos)
+        collection: todoListCollection
       }));
       this.showChildView('Footer', new Footer());
 

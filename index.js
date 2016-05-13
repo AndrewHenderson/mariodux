@@ -8,9 +8,10 @@ define(function(require) {
   var morphdom = require('morphdom');
   var Router = require('router');
   var Root = require('root');
+  var store = require('store');
+
   var root = new Root();
   var virtualRoot = new Root();
-
   var app;
   var router;
 
@@ -19,6 +20,7 @@ define(function(require) {
     morphdom(root.$el[0], virtualRoot.render().$el[0], {
 
       onBeforeElChildrenUpdated: function(fromEl, toEl) {
+
         return !$(fromEl).is('[ref]'); // if false DOM node will not be updated
       }
     });

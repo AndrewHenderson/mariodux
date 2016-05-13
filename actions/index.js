@@ -1,11 +1,8 @@
 define(function() {
 
-  var nextTodoId = 0;
-
   function addTodo(text) {
     return {
       type: 'ADD_TODO',
-      id: nextTodoId++,
       text: text
     }
   }
