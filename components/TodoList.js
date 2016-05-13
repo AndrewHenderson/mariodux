@@ -24,6 +24,10 @@ define(function(require) {
       }
     },
 
+    events: {
+      click: 'onClick'
+    },
+
     setStyles: function() {
 
       var styles = this.styles.default;
@@ -40,10 +44,6 @@ define(function(require) {
       this.setStyles();
     },
 
-    events: {
-      click: 'onClick'
-    },
-
     onClick: function() {
       dispatch(toggleTodo(this.model.id));
     }
@@ -55,5 +55,6 @@ define(function(require) {
     childView: Todo,
 
     tagName: 'ul'
+
   });
 });
