@@ -3,7 +3,6 @@ define(function(require) {
   'use strict';
 
   var Marionette = require('marionette');
-  var store = require('store');
 
   return Marionette.LayoutView.extend({
 

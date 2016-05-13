@@ -2,6 +2,7 @@ define(function(require) {
 
   'use strict';
 
+  var $ = require('jquery');
   var Backbone = require('backbone');
   var Marionette = require('marionette');
   var morphdom = require('morphdom');
@@ -18,7 +19,7 @@ define(function(require) {
     morphdom(root.$el[0], virtualRoot.render().$el[0], {
 
       onBeforeElChildrenUpdated: function(fromEl, toEl) {
-        return !$(fromEl).is('[ref]');
+        return !$(fromEl).is('[ref]'); // if false DOM node will not be updated
       }
     });
   });
@@ -29,11 +30,10 @@ define(function(require) {
     rootRegion: '#root'
   });
 
-  router = new Router();
+  new Router();
 
   Backbone.history.start();
 
   app.rootRegion.show(root);
 
-  return app;
 });
