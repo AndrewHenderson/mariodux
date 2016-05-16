@@ -15,7 +15,7 @@ We start by rendering [two identical versions of our application's root layout](
 var root = new Root();
 var virtualRoot = new Root();
 ```
-The [true root will be attached to the document](https://github.com/AndrewHenderson/mariodux/blob/master/index.js#L44):
+The [true root is then attached to the document](https://github.com/AndrewHenderson/mariodux/blob/master/index.js#L44).
 ```js
 app.rootRegion.show(root);
 ```
