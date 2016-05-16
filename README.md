@@ -10,7 +10,7 @@ This repo is a recreation of [Redux Todos](https://github.com/reactjs/redux/tree
 Run `bower install`
 
 ## How it works
-Like React, we'll [render two identical versions of our application's root layout](https://github.com/AndrewHenderson/mariodux/blob/master/index.js#L13-L14).
+We start by rendering [two identical versions of our application's root layout](https://github.com/AndrewHenderson/mariodux/blob/master/index.js#L13-L14).
 ```js
 var root = new Root();
 var virtualRoot = new Root();
