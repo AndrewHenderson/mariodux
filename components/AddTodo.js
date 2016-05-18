@@ -12,11 +12,11 @@ define(function(require) {
     template: function() {
 
       return '<form class="form-inline">'
-          + '<div class="form-group">'
-          + '<input nomorph class="form-control"/>'
-          + '</div>'
-          + '<button type="submit" class="btn btn-primary">Add Todo</button>'
-          + '</form>';
+        + '<div class="form-group">'
+        + '<input nomorph type="text" class="form-control">'
+        + '</div>'
+        + '<button type="submit" class="btn btn-primary">Add Todo</button>'
+        + '</form>';
     },
 
     ui: {

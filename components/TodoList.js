@@ -16,9 +16,6 @@ define(function(require) {
     },
 
     styles: {
-      'default': {
-        textDecoration: 'none'
-      },
       completed: {
         textDecoration: 'line-through'
       }
@@ -30,14 +27,11 @@ define(function(require) {
 
     setStyles: function() {
 
-      var styles = this.styles.default;
       var isCompleted = this.model.get('completed');
 
       if (isCompleted) {
-        styles = this.styles.completed;
+        this.$el.css(this.styles.completed);
       }
-
-      this.$el.css(styles);
     },
 
     onRender: function() {

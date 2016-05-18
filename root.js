@@ -3,13 +3,12 @@ define(function(require) {
   'use strict';
 
   var Marionette = require('marionette');
-  var store = require('store');
   var AddTodo = require('components/AddTodo');
   var TodoList = require('components/TodoList');
   var Footer = require('components/Footer');
   var todosContainer = require('containers/todos');
 
-  window.getState = store.getState; // FOR DEMO ONLY
+  window.getState = require('store').getState; // FOR DEMO ONLY
 
   return Marionette.LayoutView.extend({
 
