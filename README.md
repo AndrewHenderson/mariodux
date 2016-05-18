@@ -4,7 +4,7 @@
 ## Motivation
 Migrating an existing project to [React](https://github.com/facebook/react) is not always an option.
 
-This repo is a recreation of [Redux Todos](https://github.com/reactjs/redux/tree/master/examples/todos) demonstrating how Redux and morphdom can be added to an exisitng Marionette project, thus providing the benefit of popular React and Redux features; specifically, unidirectional data flow and DOM diffing.
+This repo is a recreation of [Redux Todos](https://github.com/reactjs/redux/tree/master/examples/todos) demonstrating how Redux and morphdom can be added to an exisitng Marionette project, thus providing the benefit of popular Redux and React features; specifically, unidirectional data flow and DOM diffing.
 
 ## Getting Started
 Run `bower install`
