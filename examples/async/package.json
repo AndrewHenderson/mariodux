@@ -1,0 +1,25 @@
+{
+  "name": "mariodux",
+  "version": "0.0.1",
+  "description": "Examples of Marionette.js Applications using Redux.js and morphdom.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/andrewhenderson/mariodux.git"
+  },
+  "keywords": [
+    "marionette",
+    "backbone",
+    "react",
+    "redux",
+    "flux",
+    "morphdom",
+    "virtualdom"
+  ],
+  "author": "Andrew Henderson <andrew.m.henderson@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/thejameskyle/marionette-wires/issues"
+  }
+}
