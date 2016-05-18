@@ -7,13 +7,6 @@ define(function() {
     }
   }
 
-  function setVisibilityFilter(filter) {
-    return {
-      type: 'SET_VISIBILITY_FILTER',
-      filter: filter
-    }
-  }
-
   function toggleTodo(id) {
     return {
       type: 'TOGGLE_TODO',
@@ -21,9 +14,16 @@ define(function() {
     }
   }
 
+  function setVisibilityFilter(filter) {
+    return {
+      type: 'SET_VISIBILITY_FILTER',
+      filter: filter
+    }
+  }
+
   return {
     addTodo: addTodo,
-    setVisibilityFilter: setVisibilityFilter,
-    toggleTodo: toggleTodo
+    toggleTodo: toggleTodo,
+    setVisibilityFilter: setVisibilityFilter
   };
 });
