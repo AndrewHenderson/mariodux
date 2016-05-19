@@ -12,15 +12,15 @@ define(function(require) {
 
     template: function() {
 
-      return '<div id="AddTodo"></div>'
-          + '<div id="TodoList"></div>'
-          + '<div id="Footer"></div>'
+      return '<AddTodo/>'
+          + '<TodoList/>'
+          + '<Footer/>'
     },
 
     regions: {
-      AddTodo: '#AddTodo',
-      TodoList: '#TodoList',
-      Footer: '#Footer'
+      AddTodo: 'AddTodo',
+      TodoList: 'TodoList',
+      Footer: 'Footer'
     },
 
     showChildViews: function() {

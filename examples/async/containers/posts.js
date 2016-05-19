@@ -21,8 +21,10 @@ define(function(require) {
 
       var state = store.getState();
       var selectedReddit = state.selectedReddit;
+      var postsByReddit = state.postsByReddit;
+      var selectedPosts = postsByReddit[selectedReddit];
 
-      if (_.isUndefined(state.postsByReddit[selectedReddit]) || !state.postsByReddit[selectedReddit].isFetching) {
+      if (_.isUndefined(selectedPosts) || !selectedPosts.isFetching) {
 
         dispatch(requestPosts(selectedReddit));
 
@@ -31,6 +33,8 @@ define(function(require) {
         }).done(function() {
           dispatch(receivePosts(selectedReddit, this.toJSON()));
         })
+      } else {
+        return true;
       }
     },
 

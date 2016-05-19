@@ -53,12 +53,17 @@ define(function(require) {
 
     showChildViews: function() {
 
+      var state = store.getState();
+      var selectedReddit = state.selectedReddit;
+      var postsByReddit = state.postsByReddit;
+      var selectedPosts = postsByReddit[selectedReddit];
+
       this.showChildView('Picker', new Picker());
       this.showChildView('Posts', new Posts({
         collection: postsCollection
       }));
 
-      if (postsCollection.isEmpty()) {
+      if (!selectedPosts || !selectedPosts.items.length) {
         postsCollection.fetchPostsIfNeeded();
       }
 
