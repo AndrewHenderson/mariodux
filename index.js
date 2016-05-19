@@ -24,6 +24,8 @@ define(function(require) {
 
     morphdom(realDOM, virtualDOM, {
 
+      childrenOnly: true,
+
       onBeforeElChildrenUpdated: function(fromEl, toEl) {
 
         var isMorphable = !$(fromEl).is('[nomorph]');

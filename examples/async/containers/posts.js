@@ -30,7 +30,7 @@ define(function(require) {
 
         return this.fetch({
           context: this
-        }).done(function() {
+        }).done(function onDoneFetchingPosts() {
           dispatch(receivePosts(selectedReddit, this.toJSON()));
         })
       } else {

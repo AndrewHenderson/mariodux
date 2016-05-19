@@ -9,7 +9,7 @@ define(function(require) {
   var dispatch = store.dispatch;
   var selectReddit = require('actions/index.js').selectReddit;
 
-  return Marionette.LayoutView.extend({
+  return Marionette.ItemView.extend({
 
     template: function(props) {
 
