@@ -6,7 +6,7 @@ define(function(require) {
   var Marionette = require('marionette');
   var Picker = require('components/Picker');
   var Posts = require('components/Posts');
-  var postsCollection = require('containers/posts');
+  var postsContainer = require('containers/posts');
   var store = require('store');
   var dispatch = store.dispatch;
   var invalidateReddit = require('actions/index').invalidateReddit;
@@ -53,18 +53,15 @@ define(function(require) {
 
     showChildViews: function() {
 
-      var state = store.getState();
-      var selectedReddit = state.selectedReddit;
-      var postsByReddit = state.postsByReddit;
-      var selectedPosts = postsByReddit[selectedReddit];
+      var selectedPostsCollection = postsContainer.getSelectedPosts();
 
       this.showChildView('Picker', new Picker());
       this.showChildView('Posts', new Posts({
-        collection: postsCollection
+        collection: selectedPostsCollection
       }));
 
-      if (!selectedPosts || !selectedPosts.items.length) {
-        postsCollection.fetchPostsIfNeeded();
+      if (selectedPostsCollection.isEmpty()) {
+        selectedPostsCollection.fetchPostsIfNeeded();
       }
 
       return this;
@@ -77,9 +74,10 @@ define(function(require) {
     onClickRefresh: function() {
 
       var selectedReddit = store.getState().selectedReddit;
+      var selectedPostsCollection = postsContainer.getSelectedPosts();
 
       dispatch(invalidateReddit(selectedReddit));
-      postsCollection.fetchPostsIfNeeded();
+      selectedPostsCollection.fetchPostsIfNeeded();
     }
   });
 });

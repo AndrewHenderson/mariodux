@@ -47,5 +47,21 @@ define(function(require) {
     }
   });
 
-  return new Posts();
+  return {
+
+    getSelectedPosts: function() {
+
+      var state = store.getState();
+      var selectedReddit = state.selectedReddit;
+      var postsByReddit = state.postsByReddit;
+      var selectedPosts = postsByReddit[selectedReddit];
+      var selectedItems = [];
+
+      if (selectedPosts) {
+        selectedItems = selectedPosts.items;
+      }
+
+      return new Posts(selectedItems);
+    }
+  }
 });
