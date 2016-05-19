@@ -17,27 +17,6 @@ define(function(require) {
       return 'https://www.reddit.com/r/' + selectedReddit + '.json';
     },
 
-    fetchPostsIfNeeded: function() {
-
-      var state = store.getState();
-      var selectedReddit = state.selectedReddit;
-      var postsByReddit = state.postsByReddit;
-      var selectedPosts = postsByReddit[selectedReddit];
-
-      if (_.isUndefined(selectedPosts) || !selectedPosts.isFetching) {
-
-        dispatch(requestPosts(selectedReddit));
-
-        return this.fetch({
-          context: this
-        }).done(function onDoneFetchingPosts() {
-          dispatch(receivePosts(selectedReddit, this.toJSON()));
-        })
-      } else {
-        return true;
-      }
-    },
-
     parse: function(response) {
 
       return response.data.children.map(function(child){
@@ -62,6 +41,29 @@ define(function(require) {
       }
 
       return new Posts(selectedItems);
+    },
+
+    fetchPostsIfNeeded: function() {
+
+      var state = store.getState();
+      var selectedReddit = state.selectedReddit;
+      var postsByReddit = state.postsByReddit;
+      var selectedPosts = postsByReddit[selectedReddit];
+      var isSelectedInvalid = selectedPosts && selectedPosts.didInvalidate;
+      var collection = this.getSelectedPosts();
+      var shouldFetchPosts = isSelectedInvalid ||
+        (collection.isEmpty() && (_.isUndefined(selectedPosts) || !selectedPosts.isFetching));
+
+      if (shouldFetchPosts) {
+
+        dispatch(requestPosts(selectedReddit));
+
+        return collection.fetch({
+          context: collection
+        }).done(function onDoneFetchingPosts() {
+          dispatch(receivePosts(selectedReddit, collection.toJSON()));
+        })
+      }
     }
   }
 });

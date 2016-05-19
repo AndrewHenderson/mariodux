@@ -53,16 +53,12 @@ define(function(require) {
 
     showChildViews: function() {
 
-      var selectedPostsCollection = postsContainer.getSelectedPosts();
-
       this.showChildView('Picker', new Picker());
       this.showChildView('Posts', new Posts({
-        collection: selectedPostsCollection
+        collection: postsContainer.getSelectedPosts()
       }));
 
-      if (selectedPostsCollection.isEmpty()) {
-        selectedPostsCollection.fetchPostsIfNeeded();
-      }
+      postsContainer.fetchPostsIfNeeded();
 
       return this;
     },
@@ -71,13 +67,14 @@ define(function(require) {
       this.showChildViews();
     },
 
-    onClickRefresh: function() {
+    onClickRefresh: function(e) {
 
       var selectedReddit = store.getState().selectedReddit;
-      var selectedPostsCollection = postsContainer.getSelectedPosts();
+
+      e.preventDefault();
 
       dispatch(invalidateReddit(selectedReddit));
-      selectedPostsCollection.fetchPostsIfNeeded();
+      postsContainer.fetchPostsIfNeeded();
     }
   });
 });

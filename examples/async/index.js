@@ -23,13 +23,7 @@ define(function(require) {
     var virtualDOM = virtualRoot.render().$el[0];
 
     morphdom(realDOM, virtualDOM, {
-
-      onBeforeElChildrenUpdated: function(fromEl, toEl) {
-
-        var isMorphable = !$(fromEl).is('[nomorph]');
-
-        return isMorphable; // if false realDOM child node will not be updated
-      }
+      childrenOnly: true
     });
   });
 
