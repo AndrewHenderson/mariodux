@@ -11,6 +11,12 @@ define(function(require) {
 
     template: function(props) {
       return props.title;
+    },
+
+    attributes: function() {
+      return {
+        'data-cid': this.cid
+      }
     }
 
   });
@@ -53,6 +59,12 @@ define(function(require) {
 
       if (selectedPosts && selectedPosts.isFetching) {
         this.$el.css({ opacity: 0.5 });
+      }
+    },
+
+    attributes: function() {
+      return {
+        'data-cid': this.cid
       }
     }
   });

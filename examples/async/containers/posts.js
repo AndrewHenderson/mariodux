@@ -31,10 +31,10 @@ define(function(require) {
     getSelectedPosts: function() {
 
       var state = store.getState();
+      var selectedItems = [];
       var selectedReddit = state.selectedReddit;
       var postsByReddit = state.postsByReddit;
       var selectedPosts = postsByReddit[selectedReddit];
-      var selectedItems = [];
 
       if (selectedPosts) {
         selectedItems = selectedPosts.items;
@@ -51,6 +51,7 @@ define(function(require) {
       var selectedPosts = postsByReddit[selectedReddit];
       var isSelectedInvalid = selectedPosts && selectedPosts.didInvalidate;
       var collection = this.getSelectedPosts();
+
       var shouldFetchPosts = isSelectedInvalid ||
         (collection.isEmpty() && (_.isUndefined(selectedPosts) || !selectedPosts.isFetching));
 
@@ -58,12 +59,13 @@ define(function(require) {
 
         dispatch(requestPosts(selectedReddit));
 
-        return collection.fetch({
-          context: collection
-        }).done(function onDoneFetchingPosts() {
-          dispatch(receivePosts(selectedReddit, collection.toJSON()));
-        })
+        return collection.fetch()
+          .done(function onDoneFetchingPosts() {
+            dispatch(receivePosts(selectedReddit, collection.toJSON()));
+          });
       }
+
+      return true;
     }
   }
 });

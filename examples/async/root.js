@@ -2,6 +2,7 @@ define(function(require) {
 
   'use strict';
 
+  var $ = require('jquery');
   var _ = require('underscore');
   var Marionette = require('marionette');
   var Picker = require('components/Picker');
@@ -39,7 +40,7 @@ define(function(require) {
     },
 
     ui: {
-      refresh: 'a'
+      refreshLink: 'a'
     },
 
     regions: {
@@ -48,17 +49,17 @@ define(function(require) {
     },
 
     events: {
-      'click @ui.refresh': 'onClickRefresh'
+      'click @ui.refreshLink': 'onClickRefreshLink'
     },
 
     showChildViews: function() {
 
       this.showChildView('Picker', new Picker());
-      this.showChildView('Posts', new Posts({
-        collection: postsContainer.getSelectedPosts()
-      }));
 
-      postsContainer.fetchPostsIfNeeded();
+      $.when(postsContainer.fetchPostsIfNeeded())
+        .done(this.showChildView.call(this, 'Posts', new Posts({
+          collection: postsContainer.getSelectedPosts()
+        })));
 
       return this;
     },
@@ -67,7 +68,7 @@ define(function(require) {
       this.showChildViews();
     },
 
-    onClickRefresh: function(e) {
+    onClickRefreshLink: function(e) {
 
       var selectedReddit = store.getState().selectedReddit;
 

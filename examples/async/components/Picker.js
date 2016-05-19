@@ -36,10 +36,10 @@ define(function(require) {
     },
 
     events: {
-      'change @ui.select': 'onChange'
+      'change @ui.select': 'onChangeSelect'
     },
 
-    onChange: function() {
+    onChangeSelect: function() {
       dispatch(selectReddit(this.ui.select.val()));
     }
   });
