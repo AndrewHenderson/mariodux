@@ -7,7 +7,7 @@ define(function(require) {
   var Marionette = require('marionette');
   var store = require('store');
   var dispatch = store.dispatch;
-  var selectReddit = require('actions/index').selectReddit;
+  var selectReddit = require('actions/index.js').selectReddit;
 
   return Marionette.LayoutView.extend({
 

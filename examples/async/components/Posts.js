@@ -22,7 +22,10 @@ define(function(require) {
     template: function() {
 
       var state = store.getState();
-      var isFetching = state.isFetching;
+      var selectedReddit = state.selectedReddit;
+      var postsByReddit = state.postsByReddit;
+      var selectedPosts = postsByReddit[selectedReddit];
+      var isFetching = selectedPosts && selectedPosts.isFetching;
 
       if (isFetching) {
         return 'Loading...';
@@ -39,7 +42,18 @@ define(function(require) {
 
     childView: Post,
 
-    emptyView: EmptyView
+    emptyView: EmptyView,
 
+    onRender: function() {
+
+      var state = store.getState();
+      var selectedReddit = state.selectedReddit;
+      var postsByReddit = state.postsByReddit;
+      var selectedPosts = postsByReddit[selectedReddit];
+
+      if (selectedPosts && selectedPosts.isFetching) {
+        this.$el.css({ opacity: 0.5 });
+      }
+    }
   });
 });

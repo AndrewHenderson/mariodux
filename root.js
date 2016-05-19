@@ -8,8 +8,6 @@ define(function(require) {
   var Footer = require('components/Footer');
   var todosContainer = require('containers/todos');
 
-  window.getState = require('store').getState; // FOR DEMO ONLY
-
   return Marionette.LayoutView.extend({
 
     template: function() {

@@ -9,6 +9,8 @@ define(function(require) {
   var Router = require('router');
   var Root = require('root');
   var store = require('store');
+  
+  window.getState = store.getState; // FOR DEMO ONLY
 
   var root = new Root();
   var virtualRoot = new Root();

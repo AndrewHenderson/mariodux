@@ -10,6 +10,8 @@ define(function(require) {
   var Root = require('root');
   var store = require('store');
 
+  window.getState = store.getState; // FOR DEMO ONLY
+
   var root = new Root();
   var virtualRoot = new Root();
   var app;

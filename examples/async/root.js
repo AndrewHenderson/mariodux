@@ -8,24 +8,21 @@ define(function(require) {
   var Posts = require('components/Posts');
   var postsCollection = require('containers/posts');
   var store = require('store');
-
-  window.getState = store.getState; // FOR DEMO ONLY
+  var dispatch = store.dispatch;
+  var invalidateReddit = require('actions/index').invalidateReddit;
 
   return Marionette.LayoutView.extend({
 
     template: function(props) {
 
-      var refreshLink = props.isFetching ? '' : '<a href="#">Refresh</a>';
-      var $postsContainer = $('<div><Posts/></div>');
+      var lastUpdated = props.lastUpdated ? '<p><span>Last updated at ' + new Date(props.lastUpdated).toLocaleTimeString() + '. ' : '';
+      var refreshLink = !props.isFetching ? '<a href="#">Refresh</a>' : '';
 
-      if (props.isFetching) {
-        $postsContainer.css({ opacity: 0.5 });
-      }
-
-      return '<p><span>Last updated at ' + new Date(props.lastUpdated).toLocaleTimeString() + ' '
+      return '<Picker/>'
+          + lastUpdated
           + refreshLink
-          + '<Picker/>'
-          + $postsContainer.prop('outerHTML');
+          + '</p>'
+          + '<Posts/>'
     },
 
     templateHelpers: function() {
@@ -33,16 +30,25 @@ define(function(require) {
       var state = store.getState();
       var selectedReddit = state.selectedReddit;
       var postsByReddit = state.postsByReddit;
+      var selectedPosts = postsByReddit[selectedReddit];
 
-      return _.defaults({
+      return _.extend({
         isFetching: true,
         posts: []
-      }, postsByReddit[selectedReddit]);
+      }, selectedPosts);
+    },
+
+    ui: {
+      refresh: 'a'
     },
 
     regions: {
       Picker: 'Picker',
       Posts: 'Posts'
+    },
+
+    events: {
+      'click @ui.refresh': 'onClickRefresh'
     },
 
     showChildViews: function() {
@@ -61,6 +67,14 @@ define(function(require) {
 
     onRender: function() {
       this.showChildViews();
+    },
+
+    onClickRefresh: function() {
+
+      var selectedReddit = store.getState().selectedReddit;
+
+      dispatch(invalidateReddit(selectedReddit));
+      postsCollection.fetchPostsIfNeeded();
     }
   });
 });
