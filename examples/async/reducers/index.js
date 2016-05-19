@@ -55,7 +55,9 @@ define(function(require) {
       case 'INVALIDATE_REDDIT':
       case 'RECEIVE_POSTS':
       case 'REQUEST_POSTS':
-        return _.extend({}, state, posts(state[action.reddit], action));
+        var _state = _.extend({}, state);
+        _state[action.reddit] = posts(state[action.reddit], action);
+        return _state;
       default:
         return state;
     }
