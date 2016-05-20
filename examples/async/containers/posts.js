@@ -59,13 +59,11 @@ define(function(require) {
 
         dispatch(requestPosts(selectedReddit));
 
-        return collection.fetch()
+        collection.fetch()
           .done(function onDoneFetchingPosts() {
             dispatch(receivePosts(selectedReddit, collection.toJSON()));
           });
       }
-
-      return true;
     }
   }
 });

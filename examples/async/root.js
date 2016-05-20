@@ -2,7 +2,6 @@ define(function(require) {
 
   'use strict';
 
-  var $ = require('jquery');
   var _ = require('underscore');
   var Marionette = require('marionette');
   var Picker = require('components/Picker');
@@ -56,10 +55,11 @@ define(function(require) {
 
       this.showChildView('Picker', new Picker());
 
-      $.when(postsContainer.fetchPostsIfNeeded())
-        .done(this.showChildView.call(this, 'Posts', new Posts({
-          collection: postsContainer.getSelectedPosts()
-        })));
+      postsContainer.fetchPostsIfNeeded();
+
+      this.showChildView('Posts', new Posts({
+        collection: postsContainer.getSelectedPosts()
+      }));
 
       return this;
     },
@@ -75,6 +75,7 @@ define(function(require) {
       e.preventDefault();
 
       dispatch(invalidateReddit(selectedReddit));
+
       postsContainer.fetchPostsIfNeeded();
     }
   });

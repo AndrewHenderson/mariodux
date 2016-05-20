@@ -13,10 +13,12 @@ define(function(require) {
       return props.title;
     },
 
-    attributes: function() {
-      return {
-        'data-cid': this.cid
-      }
+    events: {
+      'click': 'onClick'
+    },
+
+    onClick: function() {
+      debugger; // TODO: This should fire when clicking a post's li.
     }
 
   });
@@ -60,12 +62,7 @@ define(function(require) {
       if (selectedPosts && selectedPosts.isFetching) {
         this.$el.css({ opacity: 0.5 });
       }
-    },
-
-    attributes: function() {
-      return {
-        'data-cid': this.cid
-      }
     }
+
   });
 });
