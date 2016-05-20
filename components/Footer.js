@@ -16,7 +16,7 @@ define(function(require) {
       var showActive = visibilityFilter !== 'SHOW_ACTIVE' ? '<a href="#SHOW_ACTIVE">Active</a>' : '<span>Active</span>';
       var showCompleted = visibilityFilter !== 'SHOW_COMPLETED' ? '<a href="#SHOW_COMPLETED">Completed</a>' : '<span>Completed</span>';
 
-      return '<p>Show: '
+      return '<p><span>Show:</span>'
         + showAll
         + showActive
         + showCompleted

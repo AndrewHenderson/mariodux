@@ -13,7 +13,7 @@ define(function(require) {
 
       return '<form class="form-inline">'
         + '<div class="form-group">'
-        + '<input nomorph type="text" class="form-control">' // Using nomorph to preserve the input's value
+        + '<input ref type="text" class="form-control">' // Using ref to preserve the input's value
         + '</div>'
         + '<button type="submit" class="btn btn-primary">Add Todo</button>'
         + '</form>';

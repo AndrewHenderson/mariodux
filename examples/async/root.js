@@ -18,11 +18,11 @@ define(function(require) {
       var lastUpdated = props.lastUpdated ? '<p><span>Last updated at ' + new Date(props.lastUpdated).toLocaleTimeString() + '. ' : '';
       var refreshLink = !props.isFetching ? '<a href="#">Refresh</a>' : '';
 
-      return '<Picker/>'
+      return '<div id="pickerRegion"/>'
           + lastUpdated
           + refreshLink
           + '</p>'
-          + '<Posts/>'
+          + '<div id="postsRegion"/>'
     },
 
     templateHelpers: function() {
@@ -43,8 +43,8 @@ define(function(require) {
     },
 
     regions: {
-      Picker: 'Picker',
-      Posts: 'Posts'
+      pickerRegion: '#pickerRegion',
+      postsRegion: '#postsRegion'
     },
 
     events: {
@@ -53,15 +53,12 @@ define(function(require) {
 
     showChildViews: function() {
 
-      this.showChildView('Picker', new Picker());
+      this.showChildView('pickerRegion', new Picker());
 
       postsContainer.fetchPostsIfNeeded();
-
-      this.showChildView('Posts', new Posts({
+      this.showChildView('postsRegion', new Posts({
         collection: postsContainer.getSelectedPosts()
       }));
-
-      return this;
     },
 
     onRender: function() {

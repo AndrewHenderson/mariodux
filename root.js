@@ -12,28 +12,26 @@ define(function(require) {
 
     template: function() {
 
-      return '<AddTodo/>'
-          + '<TodoList/>'
-          + '<Footer/>'
+      return '<div id="addTodoRegion"/>'
+          + '<div id="todoListRegion"/>'
+          + '<div id="footerRegion"/>'
     },
 
     regions: {
-      AddTodo: 'AddTodo',
-      TodoList: 'TodoList',
-      Footer: 'Footer'
+      addTodoRegion: '#addTodoRegion',
+      todoListRegion: '#todoListRegion',
+      footerRegion: '#footerRegion'
     },
 
     showChildViews: function() {
 
       var todoListCollection = todosContainer.getVisibleCollection();
 
-      this.showChildView('AddTodo', new AddTodo());
-      this.showChildView('TodoList', new TodoList({
+      this.showChildView('addTodoRegion', new AddTodo());
+      this.showChildView('todoListRegion', new TodoList({
         collection: todoListCollection
       }));
-      this.showChildView('Footer', new Footer());
-
-      return this;
+      this.showChildView('footerRegion', new Footer());
     },
 
     onRender: function() {

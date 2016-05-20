@@ -20,17 +20,17 @@ define(function(require) {
   store.subscribe(function updateDOM() {
 
     var realDOM = root.$el[0];
-    var virtualDOM = virtualRoot.render().$el[0];
+    var virtualDOM = virtualRoot.render().$el.prop('outerHTML');
 
     morphdom(realDOM, virtualDOM, {
 
       childrenOnly: true,
 
-      onBeforeElChildrenUpdated: function(fromEl, toEl) {
+      onBeforeElUpdated: function(fromEl, toEl) {
 
-        var isMorphable = !$(fromEl).is('[nomorph]');
+        var isMorphable = !$(fromEl).is('[ref]');
 
-        return isMorphable; // if false realDOM child node will not be updated
+        return isMorphable; // If false realDOM child node will not be updated
       }
     });
   });
@@ -38,13 +38,13 @@ define(function(require) {
   app = new Marionette.Application();
 
   app.addRegions({
-    rootRegion: '#root'
+    appRegion: '#app'
   });
 
   new Router();
 
   Backbone.history.start();
 
-  app.rootRegion.show(root);
+  app.appRegion.show(root);
 
 });
