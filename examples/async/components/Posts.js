@@ -17,6 +17,11 @@ define(function(require) {
       'click': 'onClick'
     },
 
+    remove: function() {
+      this.stopListening();
+      return this;
+    },
+
     onClick: function() {
       debugger; // TODO: This should fire when clicking a post's li.
     }

@@ -19,7 +19,7 @@ define(function(require) {
   store.subscribe(function updateDOM() {
 
     var realDOM = root.$el[0];
-    var virtualDOM = virtualRoot.render().$el.prop('outerHTML');
+    var virtualDOM = virtualRoot.render().$el[0];
 
     morphdom(realDOM, virtualDOM, {
       childrenOnly: true

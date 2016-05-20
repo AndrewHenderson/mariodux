@@ -7,7 +7,7 @@ define(function(require) {
   var dispatch = store.dispatch;
   var toggleTodo = require('actions/index').toggleTodo;
 
-  var Todo = Marionette.LayoutView.extend({
+  var Todo = Marionette.ItemView.extend({
 
     tagName: 'li',
 
@@ -23,6 +23,11 @@ define(function(require) {
 
     events: {
       click: 'onClick'
+    },
+
+    remove: function() {
+      this.stopListening();
+      return this;
     },
 
     setStyles: function() {
