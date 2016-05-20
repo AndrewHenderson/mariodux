@@ -29,13 +29,13 @@ define(function(require) {
   app = new Marionette.Application();
 
   app.addRegions({
-    rootRegion: '#root'
+    appRegion: '#appRegion'
   });
 
   new Router();
 
   Backbone.history.start();
 
-  app.rootRegion.show(root);
+  app.appRegion.show(root);
 
 });

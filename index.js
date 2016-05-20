@@ -38,7 +38,7 @@ define(function(require) {
   app = new Marionette.Application();
 
   app.addRegions({
-    appRegion: '#app'
+    appRegion: '#appRegion'
   });
 
   new Router();
