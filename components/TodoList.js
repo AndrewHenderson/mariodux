@@ -25,6 +25,7 @@ define(function(require) {
       click: 'onClick'
     },
 
+    // Override to bypass the removal of view.el from the DOM
     remove: function() {
       this.stopListening();
       return this;

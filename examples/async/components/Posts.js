@@ -13,17 +13,10 @@ define(function(require) {
       return props.title;
     },
 
-    events: {
-      'click': 'onClick'
-    },
-
+    // Override to bypass the removal of view.el from the DOM
     remove: function() {
       this.stopListening();
       return this;
-    },
-
-    onClick: function() {
-      debugger; // TODO: This should fire when clicking a post's li.
     }
 
   });
