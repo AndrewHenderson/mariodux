@@ -9,6 +9,17 @@ define(function(require) {
 
     tagName: 'li',
 
+    // FOR DEMO PURPOSES ONLY
+    // Listen for when a node is added to the DOM, in lieu of "onAttach" event
+    events: {
+      'added': 'onAdded'
+    },
+
+    // FOR DEMO PURPOSES ONLY
+    attributes: {
+      ref: ''
+    },
+
     template: function(props) {
       return props.title;
     },
@@ -17,6 +28,11 @@ define(function(require) {
     remove: function() {
       this.stopListening();
       return this;
+    },
+
+    // FOR DEMO PURPOSES ONLY
+    onAdded: function(e, node) {
+      console.log($(node).position('top'));
     }
 
   });

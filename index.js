@@ -10,7 +10,7 @@ define(function(require) {
   var Root = require('root');
   var store = require('store');
 
-  window.getState = store.getState; // FOR DEMO ONLY
+  window.getState = store.getState; // FOR DEMO PURPOSES ONLY
 
   var root = new Root();
   var virtualRoot = new Root();
@@ -27,10 +27,9 @@ define(function(require) {
       childrenOnly: true,
 
       onBeforeElUpdated: function(fromEl, toEl) {
-
-        var isMorphable = !$(fromEl).is('[ref]');
-
-        return isMorphable; // If false realDOM child node will not be updated
+        if (fromEl.hasAttribute('ref')) {
+          $(toEl).trigger('before:update', fromEl);
+        }
       }
     });
   });

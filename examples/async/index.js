@@ -9,7 +9,7 @@ define(function(require) {
   var Root = require('root');
   var store = require('store');
   
-  window.getState = store.getState; // FOR DEMO ONLY
+  window.getState = store.getState; // FOR DEMO PURPOSES ONLY
 
   var root = new Root();
   var virtualRoot = new Root();
@@ -22,7 +22,12 @@ define(function(require) {
     var virtualDOM = virtualRoot.render().$el[0];
 
     morphdom(realDOM, virtualDOM, {
-      childrenOnly: true
+      childrenOnly: true,
+      onNodeAdded: function(node) {
+        if (node.hasAttribute('ref')) {
+          $(node).trigger('added', node);
+        }
+      }
     });
   });
 

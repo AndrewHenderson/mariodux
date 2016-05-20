@@ -13,7 +13,7 @@ define(function(require) {
 
       return '<form class="form-inline">'
         + '<div class="form-group">'
-        + '<input ref type="text" class="form-control">' // Using ref to preserve the input's value
+        + '<input ref type="text" class="form-control">' // Using ref attribute to preserve the input's value
         + '</div>'
         + '<button type="submit" class="btn btn-primary">Add Todo</button>'
         + '</form>';
@@ -25,7 +25,13 @@ define(function(require) {
     },
 
     events: {
-      'submit @ui.form': 'onSubmitForm'
+      'submit @ui.form': 'onSubmitForm',
+      'before:update @ui.input': 'onBeforeUpdateInput'
+    },
+
+    onBeforeUpdateInput: function(e, node) {
+      var $node = $(node);
+      this.ui.input.val($node.val());
     },
 
     onSubmitForm: function(e) {
