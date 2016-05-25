@@ -15,6 +15,12 @@ define(function(require) {
       return props.text;
     },
 
+    attributes: function() {
+      return {
+        'modelId': this.model.id
+      }
+    },
+
     styles: {
       completed: {
         textDecoration: 'line-through'
@@ -45,7 +51,7 @@ define(function(require) {
     },
 
     onClick: function() {
-      dispatch(toggleTodo(this.model.id));
+      dispatch(toggleTodo(this.$el.attr('modelId')));
     }
 
   });
