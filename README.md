@@ -55,3 +55,13 @@ Since we only need the model for the purposes of rendering, a workaround for thi
 
 If the view object needs to know where its node has been attached to the document, we can leverage callbacks like morphdom's   [`onNodeAdded`](
 https://github.com/AndrewHenderson/mariodux/blob/master/examples/async/index.js#L26-L30) in order to trigger a custom event and [listen for that event in the view](https://github.com/AndrewHenderson/mariodux/blob/master/examples/async/components/Posts.js#L14-L16).
+```js
+morphdom(realDOM, virtualDOM, {
+  onNodeAdded: function(node) {
+    if (node.hasAttribute('ref')) {
+      $(node).trigger('added', node);
+    }
+  }
+});
+```
+You'll notice, we've followed suit to React tagged desired nodes with the [`ref` attribute](https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute). 
