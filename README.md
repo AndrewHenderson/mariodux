@@ -49,7 +49,7 @@ events: {
   click: 'onClick'
 }
 ```
-One particular issue that arises when coupling discreet event listeners with DOM diffing is that the DOM node may be presenting data which is not part the view's model. This is most apparent in the provided [async example](https://github.com/AndrewHenderson/mariodux/tree/master/examples/async) where `li` nodes are maintained and only their text updated.
+One particular issue that arises when coupling discreet event listeners with DOM diffing is that the DOM node may be presenting data which is not part the view's model. This is most apparent in the provided [async example](https://github.com/AndrewHenderson/mariodux/tree/master/examples/async) where views hold reference to `li` nodes and whose text was updated by  morphdom.
 
 When this happens, the node continues to belong to a view that rendered it, a view whose model does not contain the data presented.
 
