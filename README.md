@@ -72,7 +72,7 @@ morphdom(realDOM, virtualDOM, {
 You'll notice we've followed suit to React and tagged desired nodes with the [`ref` attribute](https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute).
 
 ### Maintianing Browser State
-If we need to get the value of the nodes such as `inputs` before we update the DOM, we can leverage morphdom's [`onBeforeElUpdated`](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/index.js#L29-L32).
+If we need to reference the node currently in the DOM before updating, we can leverage morphdom's [`onBeforeElUpdated`](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/index.js#L29-L32). This is useful when needing to maintain things like the text currently typed into an `input` field.
 ```js
 morphdom(realDOM, virtualDOM, {
   onBeforeElUpdated: function(fromEl, toEl) {
@@ -82,12 +82,12 @@ morphdom(realDOM, virtualDOM, {
   }
 });
 ```
-Doing so allows us to [check the value of the input](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/AddTodo.js#L32-L35) before updating the DOM.
+We can use this to [check the value of the input](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/AddTodo.js#L32-L35) before updating the DOM.
 ```js
 onBeforeUpdateInput: function(e, fromEl) {
   var $fromEl = $(fromEl);
   this.ui.input.val($fromEl.val());
 }
 ```
-### Overrding ChildView.remove
+### Overriding Marionette DOM removal
 Since morpdom is now tasked with managing the DOM, we override Marionette's `ChildView.remove`. Doing so allows morphdom to update the DOM efficiently. Othwerise, morphdom would see more additions than are actually necessary.
