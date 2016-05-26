@@ -32,7 +32,7 @@ define(function(require) {
 
     // FOR DEMO PURPOSES ONLY
     onAdded: function(e, node) {
-      //console.log($(node).position('top'));
+      //console.log(this.$el.position('top'));
     }
 
   });

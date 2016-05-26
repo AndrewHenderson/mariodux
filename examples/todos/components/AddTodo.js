@@ -29,9 +29,11 @@ define(function(require) {
       'before:update @ui.input': 'onBeforeUpdateInput'
     },
 
-    onBeforeUpdateInput: function(e, node) {
-      var $node = $(node);
-      this.ui.input.val($node.val());
+    onBeforeUpdateInput: function(e, fromEl) {
+
+      var $fromEl = $(fromEl);
+
+      this.ui.input.val($fromEl.val());
     },
 
     onSubmitForm: function(e) {
