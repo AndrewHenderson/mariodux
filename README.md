@@ -42,6 +42,7 @@ The true root will not be re-rendered. It is only rendered once at the beginning
 This approach largely ignores the event systems provided in Backbone and Marionette in favor of a single dispatcher and pure functions. **Using this approach, views should only be concerned with rendering and dispatching.**
 
 ## Gotchas
+### Discreet Event Listeners
 As an alternative to the complexities of [React's synthetic event system](https://facebook.github.io/react/docs/working-with-the-browser.html), we continue to listen for DOM events in the view's [events object](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L30-L32).
 ```js
 events: {
@@ -52,6 +53,7 @@ One particular issue that arises when coupling discreet event listeners with DOM
 
 When this happens, the node continues to belong to a view that rendered it, a view whose model does not contain the data presented.
 
+### Keeping nodes tied to the correct model
 In order to ensure the dispatcher is provided the correct `model.id`, we store the id on the node in a custom attribute, `modelId`. This way, [the proper id can be used when notifying the dispatcher](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L54).
 
 If the view object needs to know where its node has been attached to the document, we can leverage callbacks like morphdom's   [`onNodeAdded`](
@@ -84,3 +86,5 @@ onBeforeUpdateInput: function(e, fromEl) {
   this.ui.input.val($fromEl.val());
 }
 ```
+### Overrding ChildView.remove
+Since morpdom is now tasked with managing the DOM, we override Marionette's `ChildView.remove`. Doing so allows morphdom to update the DOM efficiently. Othwerise, morphdom would see more additions than are actually necessary.
