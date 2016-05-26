@@ -19,7 +19,7 @@ app.rootRegion.show(root);
 The virtual root will essentially act as the worker. It will be used to re-render when changes are made to the app's global state object.
 
 ## Priciples
-Following the [Redux principles](http://redux.js.org/docs/introduction/ThreePrinciples.html), views will leverage [pure functions](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/reducers/todos.js#L10-L43) to update their models, [dispatching events](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L53-L55) rather than setting properties on their model directly.
+Following the [Redux principles](http://redux.js.org/docs/introduction/ThreePrinciples.html), views will leverage [pure functions](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/reducers/todos.js#L10-L43) to update their models, [dispatching events](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L53-L55) rather than setting properties on models directly.
 ```js
 onClick: function() {
   dispatch(toggleTodo(this.$el.attr('modelId')));
