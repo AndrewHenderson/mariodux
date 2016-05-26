@@ -43,7 +43,7 @@ This approach largely ignores the event systems provided in Backbone and Marione
 
 ## Gotchas
 ### Discreet Event Listeners
-As an alternative to the complexities of [React's synthetic event system](https://facebook.github.io/react/docs/working-with-the-browser.html), our views will continue to listen for DOM events [events object](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L30-L32).
+As an alternative to the complexities of [React's synthetic event system](https://facebook.github.io/react/docs/working-with-the-browser.html), our [views will continue to listen for DOM events](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L30-L32).
 ```js
 events: {
   click: 'onClick'
