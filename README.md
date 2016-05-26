@@ -79,8 +79,8 @@ morphdom(realDOM, virtualDOM, {
 ```
 Doing so allows us to [check the value of the input](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/AddTodo.js#L32-L35) before updating the DOM.
 ```js
-onBeforeUpdateInput: function(e, beforeNode) {
-  var $beforeNode = $(beforeNode);
-  this.ui.input.val($beforeNode.val());
+onBeforeUpdateInput: function(e, fromEl) {
+  var $fromEl = $(fromEl);
+  this.ui.input.val($fromEl.val());
 }
 ```
