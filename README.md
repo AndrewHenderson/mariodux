@@ -12,7 +12,7 @@ We start by creating [two versions of the application's root layout](https://git
 var root = new Root();
 var virtualRoot = new Root();
 ```
-The true root is attached to the document and will continue to serve as a representation of our application state.
+**The true root is attached to the document and will continue to serve as a representation of our application state.**
 ```js
 app.rootRegion.show(root);
 ```
