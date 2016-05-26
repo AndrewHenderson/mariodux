@@ -58,7 +58,7 @@ This is most apparent in the provided [async example](https://github.com/AndrewH
 In order to ensure the dispatcher is provided the correct `model.id`, we store the model's id on the node in a custom attribute, `modelId`. This way, [the proper id can be used when notifying the dispatcher](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L54).
 
 ### Node onAttach
-If the view needs to know once its node has been attached to the document, we can leverage callbacks like morphdom's   [`onNodeAdded`](
+If the view needs to know when its node has been attached to the document, we can leverage callbacks like morphdom's   [`onNodeAdded`](
 https://github.com/AndrewHenderson/mariodux/blob/master/examples/async/index.js#L26-L30) in order to trigger a custom event and [listen for that event in the view](https://github.com/AndrewHenderson/mariodux/blob/master/examples/async/components/Posts.js#L14-L16).
 ```js
 morphdom(realDOM, virtualDOM, {
