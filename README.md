@@ -46,7 +46,7 @@ This approach ignores those functions and events in favor of pure functions and 
 **Using this approach, views should only be concerned with rendering and dispatching.**
 
 ## Gotchas
-As an alternative to the complexities of something like [React's synthetic event system](https://facebook.github.io/react/docs/working-with-the-browser.html), we will continue to listen for DOM events in the view on the [events object](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L30-L32).
+As an alternative to the complexities of [React's synthetic event system](https://facebook.github.io/react/docs/working-with-the-browser.html), we will continue to listen for DOM events in the view on the [events object](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L30-L32).
 ```js
 events: {
   click: 'onClick'
