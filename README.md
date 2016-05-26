@@ -37,7 +37,7 @@ store.subscribe(function updateDOM() {
 ```
 The true root will not be re-rendered. It is only rendered once at the beginning. From then on, morphdom will handle all future updates.
 
-**Using this approach, views should only be concerned with rendering and dispatching.*&
+**Using this approach, views should only be concerned with rendering and dispatching.**
 
 ## Shift In Mindset
 Backbone and Marionette objects were both designed with event systems, having been provided functions like `modelEvents`, `collectionEvents`, `listenTo`, etc. This approach ignores those functions in favor of the more predictable immutable global state object — the app's single source of truth.
