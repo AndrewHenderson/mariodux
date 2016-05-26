@@ -54,7 +54,7 @@ events: {
 ```
 One particular issue that arises when coupling discreet event listeners with DOM diffing is that the DOM node may be presenting data which is not part the view's model. This is most apparent in the async example where `li` nodes are maintained and only their text changed.
 
-When this happens, the node continues to belong to a view whose model does not contain the data presented. Since we only need the model for the purposes of rendering, this is somewhat irrelevant.
+When this happens, the node continues to belong to a view whose model does not contain the data presented.
 
 In order to ensure the dispatcher is provided the correct `model.id`, we store the id on the node in a custom attribute, `modelId`. This way, [the proper id can be used when notifying the dispatcher](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L54).
 
