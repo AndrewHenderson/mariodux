@@ -37,19 +37,21 @@ store.subscribe(function updateDOM() {
 ```
 The true root will not be re-rendered. It is only rendered once at the beginning. From then on, morphdom will handle all future updates.
 
+## Shift In Mindset
 **Using this approach, views should only be concerned with rendering and dispatching.**
 
-## Shift In Mindset
-Backbone and Marionette objects were both designed with event systems, having been provided functions like `modelEvents`, `collectionEvents`, `listenTo`, etc. This approach ignores those functions in favor of the more predictable immutable global state object — the app's single source of truth.
+Backbone and Marionette objects were both designed with event systems — views having been provided functions like `modelEvents`, `collectionEvents`, `listenTo`, etc. and models & collections having events such as `change` and `update`. This approach ignores those functions and events in favor of pure functions and a more predictable immutable global state object — acting as the app's single source of truth.
 
-## Things To Note
+## Gotchas
 As an alternative to the complexities of something like [React's synthetic event system](https://facebook.github.io/react/docs/working-with-the-browser.html), we will continue to listen for DOM events in the view on the [events object](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L30-L32).
 ```js
 events: {
   click: 'onClick'
 }
 ```
-## Gotchas
 One issue that arises from this however, is the DOM node may have been efficiently updated by morphdom and thus represent data which is not in the view object's model — the one that was originally used to render the node.
 
 Since we only need the model for the purposes of rendering, a workaround for this is to put the `model.id` on the node in a custom attribute. This way, [the proper id can be used when notifying the dispatcher](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L54).
+
+If the view object needs to know where its node has been attached to the document, we can leverage callbacks like morphdom's   [`onNodeAdded`](
+https://github.com/AndrewHenderson/mariodux/blob/master/examples/async/index.js#L26-L30) in order to trigger a custom event and [listen for that event in the view](https://github.com/AndrewHenderson/mariodux/blob/master/examples/async/components/Posts.js#L14-L16).
