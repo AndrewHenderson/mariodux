@@ -46,15 +46,17 @@ This approach ignores those functions and events in favor of pure functions and 
 **Using this approach, views should only be concerned with rendering and dispatching.**
 
 ## Gotchas
-As an alternative to the complexities of [React's synthetic event system](https://facebook.github.io/react/docs/working-with-the-browser.html), we will continue to listen for DOM events in the view on the [events object](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L30-L32).
+As an alternative to the complexities of [React's synthetic event system](https://facebook.github.io/react/docs/working-with-the-browser.html), we continue to listen for DOM events in the view's [events object](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L30-L32).
 ```js
 events: {
   click: 'onClick'
 }
 ```
-One issue that arises from this however, is the DOM node may have been efficiently updated by morphdom and thus represent data which is not in the view object's model — the one that was originally used to render the node.
+One particular issue that arises when coupling discreet event listeners with DOM diffing is that the DOM node may be presenting data which is not part the view's model. This is most apparent in the async example where `li` nodes are maintained and only their text changed.
 
-Since we only need the model for the purposes of rendering, a workaround for this is to put the `model.id` on the node in a custom attribute. This way, [the proper id can be used when notifying the dispatcher](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L54).
+When this happens, the node continues to belong to a view whose model does not contain the data presented. Since we only need the model for the purposes of rendering, this is somewhat irrelevant.
+
+In order to ensure the dispatcher is provided the correct `model.id`, we store the id on the node in a custom attribute, `modelId`. This way, [the proper id can be used when notifying the dispatcher](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L54).
 
 If the view object needs to know where its node has been attached to the document, we can leverage callbacks like morphdom's   [`onNodeAdded`](
 https://github.com/AndrewHenderson/mariodux/blob/master/examples/async/index.js#L26-L30) in order to trigger a custom event and [listen for that event in the view](https://github.com/AndrewHenderson/mariodux/blob/master/examples/async/components/Posts.js#L14-L16).
