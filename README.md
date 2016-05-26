@@ -49,14 +49,15 @@ events: {
   click: 'onClick'
 }
 ```
-One particular issue that arises when coupling discreet event listeners with DOM diffing is that the DOM node may be presenting data which is not part the view's model. This is most apparent in the provided [async example](https://github.com/AndrewHenderson/mariodux/tree/master/examples/async) where views hold reference to `li` nodes whose text was updated by morphdom.
+One particular issue that arises when coupling discreet event listeners with DOM diffing is that the DOM node may be presenting data which is not part the view's model.
 
-When this happens, the node continues to belong to a view that rendered it, a view whose model does not contain the data presented.
+This is most apparent in the provided [async example](https://github.com/AndrewHenderson/mariodux/tree/master/examples/async) where views hold reference to thier `li` nodes whose text may have been replaced by morphdom. At this point, the view's node is presenting data that is not in the view's model.
 
-### Keeping nodes tied to the correct model
-In order to ensure the dispatcher is provided the correct `model.id`, we store the id on the node in a custom attribute, `modelId`. This way, [the proper id can be used when notifying the dispatcher](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L54).
+### Workaround
+In order to ensure the dispatcher is provided the correct `model.id`, we store the model's id on the node in a custom attribute, `modelId`. This way, [the proper id can be used when notifying the dispatcher](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L54).
 
-If the view object needs to know where its node has been attached to the document, we can leverage callbacks like morphdom's   [`onNodeAdded`](
+### Node onAttach
+If the view needs to know where its node has been attached to the document, we can leverage callbacks like morphdom's   [`onNodeAdded`](
 https://github.com/AndrewHenderson/mariodux/blob/master/examples/async/index.js#L26-L30) in order to trigger a custom event and [listen for that event in the view](https://github.com/AndrewHenderson/mariodux/blob/master/examples/async/components/Posts.js#L14-L16).
 ```js
 morphdom(realDOM, virtualDOM, {
@@ -67,9 +68,10 @@ morphdom(realDOM, virtualDOM, {
   }
 });
 ```
-You'll notice, we've followed suit to React and tagged desired nodes with the [`ref` attribute](https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute).
+You'll notice we've followed suit to React and tagged desired nodes with the [`ref` attribute](https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute).
 
-Similarly, if we need to get the value of the nodes such as `inputs` before we update the DOM, we can leverage morphdom's [`onBeforeElUpdated`](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/index.js#L29-L32).
+### Maintianing Browser State
+If we need to get the value of the nodes such as `inputs` before we update the DOM, we can leverage morphdom's [`onBeforeElUpdated`](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/index.js#L29-L32).
 ```js
 morphdom(realDOM, virtualDOM, {
   onBeforeElUpdated: function(fromEl, toEl) {
