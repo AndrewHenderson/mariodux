@@ -53,7 +53,7 @@ One particular issue that arises when coupling discreet event listeners with DOM
 
 This is most apparent in the provided [async example](https://github.com/AndrewHenderson/mariodux/tree/master/examples/async) where views hold reference to thier `li` nodes whose text may have been replaced by morphdom. At this point, the view's node is presenting data that is not in the view's model.
 
-### Workaround
+**Workaround:**
 In order to ensure the dispatcher is provided the correct `model.id`, we store the model's id on the node in a custom attribute, `modelId`. This way, [the proper id can be used when notifying the dispatcher](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L54).
 
 ### Node onAttach
