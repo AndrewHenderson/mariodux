@@ -42,6 +42,8 @@ store.subscribe(function updateDOM() {
 This approach largely ignores the event systems provided in Backbone and Marionette in favor of a single dispatcher and pure functions. **Using this approach, views should only be concerned with rendering and dispatching.**
 
 ## Gotchas
+### Overriding Marionette's DOM management
+Since morpdom is now tasked with managing the DOM, we override Marionette's `ChildView.remove`. Doing so allows morphdom to update the DOM efficiently. This keeps morphdom from seeing more additions than is actually necessary.
 ### Discreet Event Listeners
 As an alternative to the complexities of [React's synthetic event system](https://facebook.github.io/react/docs/working-with-the-browser.html), DOM event listeners will continue to reside in  the [view's events](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L30-L32).
 ```js
@@ -59,21 +61,6 @@ In order to ensure the dispatcher is provided the correct `model.id`, we store t
 ```js
 dispatch(toggleTodo(this.$el.attr('modelId')));
 ```
-
-### Node onAttach
-If the view needs to know when its node has been attached to the document, we can leverage callbacks like morphdom's   [`onNodeAdded`](
-https://github.com/AndrewHenderson/mariodux/blob/master/examples/async/index.js#L26-L30) in order to trigger a custom event which we [listen for in the view](https://github.com/AndrewHenderson/mariodux/blob/master/examples/async/components/Posts.js#L14-L16).
-```js
-morphdom(realDOM, virtualDOM, {
-  onNodeAdded: function(node) {
-    if (node.hasAttribute('ref')) {
-      $(node).trigger('added', node);
-    }
-  }
-});
-```
-You'll notice we've followed suit to React and tagged desired nodes with the [`ref` attribute](https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute).
-
 ### Maintaining Browser State
 If we need to reference the node currently in the DOM before updating, we can leverage morphdom's [`onBeforeElUpdated`](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/index.js#L29-L32). This is useful when needing to maintain things like the text currently typed into an `input` field.
 ```js
@@ -92,5 +79,16 @@ onBeforeUpdateInput: function(e, fromEl) {
   this.ui.input.val($fromEl.val());
 }
 ```
-### Overriding Marionette's DOM management
-Since morpdom is now tasked with managing the DOM, we override Marionette's `ChildView.remove`. Doing so allows morphdom to update the DOM efficiently. This keeps morphdom from seeing more additions than is actually necessary.
+### Node onAttach
+If the view needs to know when its node has been attached to the document, we can leverage callbacks like morphdom's   [`onNodeAdded`](
+https://github.com/AndrewHenderson/mariodux/blob/master/examples/async/index.js#L26-L30) in order to trigger a custom event which we [listen for in the view](https://github.com/AndrewHenderson/mariodux/blob/master/examples/async/components/Posts.js#L14-L16).
+```js
+morphdom(realDOM, virtualDOM, {
+  onNodeAdded: function(node) {
+    if (node.hasAttribute('ref')) {
+      $(node).trigger('added', node);
+    }
+  }
+});
+```
+You'll notice we've followed suit to React and tagged desired nodes with the [`ref` attribute](https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute).
