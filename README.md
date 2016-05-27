@@ -62,7 +62,7 @@ In order to ensure the dispatcher is provided the correct `model.id`, we store t
 dispatch(toggleTodo(this.$el.attr('modelId')));
 ```
 ### Persisting Browser State
-If we need to reference the node currently in the DOM before updating, we can leverage morphdom's [`onBeforeElUpdated`](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/index.js#L29-L32). This is useful when needing to maintain things like the text currently typed into an `input` field.
+If we need to reference the node currently in the DOM before updating, we can leverage morphdom's [`onBeforeElUpdated`](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/index.js#L29-L32).
 ```js
 morphdom(realDOM, virtualDOM, {
   onBeforeElUpdated: function(fromEl, toEl) {
@@ -72,7 +72,7 @@ morphdom(realDOM, virtualDOM, {
   }
 });
 ```
-We can use this to [check the value of the input](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/AddTodo.js#L32-L35) before updating the DOM.
+ We'll then set up a matching [event listener in the view](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/AddTodo.js#L32-L35). This is useful when needing to maintain things like the text currently typed into an `input` field.
 ```js
 onBeforeUpdateInput: function(e, fromEl) {
   var $fromEl = $(fromEl);
@@ -81,7 +81,7 @@ onBeforeUpdateInput: function(e, fromEl) {
 ```
 ### Node onAttach
 If the view needs to know when its node has been attached to the document, we can leverage morphdom's [`onNodeAdded`](
-https://github.com/AndrewHenderson/mariodux/blob/master/examples/async/index.js#L26-L30) in order to trigger a custom event which we [listen for in the view](https://github.com/AndrewHenderson/mariodux/blob/master/examples/async/components/Posts.js#L14-L16).
+https://github.com/AndrewHenderson/mariodux/blob/master/examples/async/index.js#L26-L30), again [listening for our custom event in the view](https://github.com/AndrewHenderson/mariodux/blob/master/examples/async/components/Posts.js#L14-L16).
 ```js
 morphdom(realDOM, virtualDOM, {
   onNodeAdded: function(node) {
@@ -91,4 +91,4 @@ morphdom(realDOM, virtualDOM, {
   }
 });
 ```
-You'll notice we've followed suit to React and tagged desired nodes with the [`ref` attribute](https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute).
+You'll notice we've followed suit to React and tagged desired nodes with the [`ref` attribute](https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute) in order to specify when to trigger the event.
