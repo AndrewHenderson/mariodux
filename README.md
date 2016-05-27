@@ -61,7 +61,7 @@ In order to ensure the dispatcher is provided the correct `model.id`, we store t
 ```js
 dispatch(toggleTodo(this.$el.attr('modelId')));
 ```
-### Maintaining Browser State
+### Persisting Browser State
 If we need to reference the node currently in the DOM before updating, we can leverage morphdom's [`onBeforeElUpdated`](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/index.js#L29-L32). This is useful when needing to maintain things like the text currently typed into an `input` field.
 ```js
 morphdom(realDOM, virtualDOM, {
