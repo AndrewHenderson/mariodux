@@ -18,7 +18,7 @@ app.rootRegion.show(root);
 ```
 The virtual root will essentially act as the worker. It will be re-rendererd when changes are made to the app's global state object. The new HTML representation will then be diffed against the representation currently in the DOM in order to make efficient updates.
 
-## Priciples
+## Principles
 Following the [Redux principles](http://redux.js.org/docs/introduction/ThreePrinciples.html), views will leverage [pure functions](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/reducers/todos.js#L10-L43) within reducers in order to update their models, [dispatching events](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L53-L55) rather than setting properties on models directly.
 ```js
 onClick: function() {
