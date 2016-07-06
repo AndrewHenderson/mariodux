@@ -12,7 +12,8 @@ define(function(require) {
     // FOR DEMO PURPOSES ONLY
     // Listen for when a node is added to the DOM, in lieu of "onAttach" event
     events: {
-      'added': 'onAdded'
+      'added': 'onAdded',
+      'click': 'onClick'
     },
 
     // FOR DEMO PURPOSES ONLY
@@ -33,6 +34,10 @@ define(function(require) {
     // FOR DEMO PURPOSES ONLY
     onAdded: function(e, node) {
       //console.log(this.$el.position('top'));
+    },
+
+    onClick: function() {
+      this.$el.css({textDecoration: 'line-through'});
     }
 
   });

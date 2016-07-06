@@ -1,5 +1,5 @@
 {
-  "name": "MaRedux",
+  "name": "mariodux",
   "version": "1.0.0",
   "dependencies": {
     "requirejs": "~2.2.0",

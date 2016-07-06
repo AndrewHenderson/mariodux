@@ -7,6 +7,7 @@ define(function(require) {
   var dispatch = store.dispatch;
   var requestPosts = require('actions/index').requestPosts;
   var receivePosts = require('actions/index').receivePosts;
+  var cache = {};
 
   var Posts = Backbone.Collection.extend({
 
@@ -35,12 +36,15 @@ define(function(require) {
       var selectedReddit = state.selectedReddit;
       var postsByReddit = state.postsByReddit;
       var selectedPosts = postsByReddit[selectedReddit];
+      var collection = cache[selectedReddit] = cache[selectedReddit] || new Posts();
 
       if (selectedPosts) {
         selectedItems = selectedPosts.items;
       }
 
-      return new Posts(selectedItems);
+      collection.add(selectedItems);
+
+      return collection;
     },
 
     fetchPostsIfNeeded: function() {
