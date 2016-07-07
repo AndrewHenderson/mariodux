@@ -4,31 +4,42 @@ define(function(require) {
 
   var Backbone = require('backbone');
   var store = require('store');
+  var collection;
 
   return {
 
-    getVisibleCollection: function() {
+    getTodosCollection: function() {
 
       var state = store.getState();
       var todos = state.todos;
+
+      collection = collection || new Backbone.Collection([]);
+      collection.add(todos, {merge: true});
+      
+      return collection;
+    },
+
+    getVisibilityFilter: function() {
+
+      var state = store.getState();
       var visibilityFilter = state.visibilityFilter;
-      var collection = new Backbone.Collection(todos);
-      var visibleTodos;
 
       switch (visibilityFilter) {
 
         case 'SHOW_ALL':
-          return collection;
+          return function () {
+            return true;
+          };
 
         case 'SHOW_COMPLETED':
-          visibleTodos = collection.where({completed: true});
-          collection.reset(visibleTodos);
-          return collection;
+          return function (child, index, collection) {
+            return child.get('completed');
+          };
 
         case 'SHOW_ACTIVE':
-          visibleTodos = collection.where({completed: false});
-          collection.reset(visibleTodos);
-          return collection;
+          return function (child, index, collection) {
+            return !child.get('completed');
+          };
       }
     }
   }

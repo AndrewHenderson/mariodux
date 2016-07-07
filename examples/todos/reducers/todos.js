@@ -2,44 +2,40 @@ define(function(require) {
 
   'use strict';
 
-  var Backbone = require('backbone');
   var nextTodoId = 0;
+  var cache = [];
 
-  var todosCollection = new Backbone.Collection([]);
+  return function todosReducer(todos, action) {
 
-  return function todos(collection, action) {
-
-    collection = todosCollection;
+    todos = cache;
 
     switch (action.type) {
 
       case 'ADD_TODO':
 
-        collection.add({
+        todos.push({
           id: nextTodoId++,
           text: action.text,
           completed: false
         });
 
-        return collection.toJSON();
+        return todos;
 
         break;
 
       case 'TOGGLE_TODO':
 
-        var model = collection.get(action.id);
+        var todo = _.find(todos, { id: action.id });
 
-        model.set({
-          completed: !model.get('completed')
-        });
+        todo.completed = !todo.completed;
 
-        return collection.toJSON();
+        return todos;
 
         break;
 
       default:
 
-        return collection.toJSON();
+        return todos;
     }
   };
 });

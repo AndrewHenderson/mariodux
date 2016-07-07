@@ -25,11 +25,10 @@ define(function(require) {
 
     showChildViews: function() {
 
-      var todoListCollection = todosContainer.getVisibleCollection();
-
       this.showChildView('addTodoRegion', new AddTodo());
       this.showChildView('todoListRegion', new TodoList({
-        collection: todoListCollection
+        collection: todosContainer.getTodosCollection(),
+        filter: todosContainer.getVisibilityFilter()
       }));
       this.showChildView('footerRegion', new Footer());
     },

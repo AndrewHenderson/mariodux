@@ -15,12 +15,6 @@ define(function(require) {
       return props.text;
     },
 
-    attributes: function() {
-      return {
-        'modelId': this.model.id
-      }
-    },
-
     styles: {
       completed: {
         textDecoration: 'line-through'
@@ -33,7 +27,9 @@ define(function(require) {
 
     // Override to bypass the removal of view.el from the DOM
     remove: function() {
+
       this.stopListening();
+
       return this;
     },
 
@@ -47,11 +43,13 @@ define(function(require) {
     },
 
     onRender: function() {
+
+      this.$el.data('modelId', this.model.id);
       this.setStyles();
     },
 
     onClick: function() {
-      dispatch(toggleTodo(this.$el.attr('modelId')));
+      dispatch(toggleTodo(this.$el.data('modelId')));
     }
 
   });

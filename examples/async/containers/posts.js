@@ -42,7 +42,7 @@ define(function(require) {
         selectedItems = selectedPosts.items;
       }
 
-      collection.add(selectedItems);
+      collection.add(selectedItems, {merge: true});
 
       return collection;
     },

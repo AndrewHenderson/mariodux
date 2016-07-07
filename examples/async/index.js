@@ -14,16 +14,16 @@ define(function(require) {
   var root = new Root();
   var virtualRoot = new Root();
   var app;
-  var router;
 
   store.subscribe(function updateDOM() {
 
-    var realDOM = root.$el[0];
+    var windowDOM = root.$el[0];
     var virtualDOM = virtualRoot.render().$el[0];
 
-    morphdom(realDOM, virtualDOM, {
+    morphdom(windowDOM, virtualDOM, {
       childrenOnly: true,
       onNodeAdded: function(node) {
+
         if (node.hasAttribute('ref')) {
           $(node).trigger('added', node);
         }
