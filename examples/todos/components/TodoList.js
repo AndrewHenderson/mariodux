@@ -44,12 +44,12 @@ define(function(require) {
 
     onRender: function() {
 
-      this.$el.data('modelId', this.model.id);
+      this.$el.data('model', this.model);
       this.setStyles();
     },
 
     onClick: function() {
-      dispatch(toggleTodo(this.$el.data('modelId')));
+      dispatch(toggleTodo(this.$el.data('model').id));
     }
 
   });

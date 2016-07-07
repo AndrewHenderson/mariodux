@@ -31,6 +31,10 @@ define(function(require) {
       return this;
     },
 
+    onRender: function() {
+      this.$el.data('model', this.model);
+    },
+
     // FOR DEMO PURPOSES ONLY
     onAdded: function(e, node) {
       //console.log(this.$el.position('top'));

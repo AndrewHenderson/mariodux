@@ -27,14 +27,14 @@ define(function(require) {
 
       onBeforeElUpdated: function(fromEl, toEl) {
 
-        var newModelId = $(toEl).data('modelId');
+        var newModel = $(toEl).data('model');
 
         if (fromEl.hasAttribute('ref')) {
           $(toEl).trigger('before:update', fromEl);
         }
 
-        if (newModelId || newModelId === 0) {
-          $(fromEl).data('modelId', newModelId);
+        if (newModel) {
+          $(fromEl).data('model', newModel);
         }
       }
     });
