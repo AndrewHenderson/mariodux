@@ -4,8 +4,6 @@ Demo of how [Redux](https://github.com/reactjs/redux) and [morphdom](https://git
 ## Motivation
 I currently work on a large scale Marionette application; migrating to React or any other framework would be a massive effort. I began this repo seeking to determine whether it was possible to replicate the Flux pattern within a Marionette application.
 
-The results proved interesting …
-
 ## The Approach
 We start by creating [two versions of the application's root layout](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/index.js#L15-L16).
 ```js
