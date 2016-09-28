@@ -37,19 +37,19 @@ store.subscribe(function updateDOM() {
 
 ## Shift In Mindset
 
-This approach largely ignores the event systems provided in Backbone and Marionette in favor of a single dispatcher and pure functions. **Using this approach, views should only be concerned with rendering and dispatching.**
+This approach largely ignores the event systems (i.e. `modelEvents`), provided in Backbone and Marionette in favor of a single dispatcher and pure functions. **Using this approach, views should only be concerned with rendering and dispatching.**
 
 ## Gotchas
 ### Overriding Marionette's DOM management
 Since morpdom is now tasked with managing the DOM, we override Marionette's `ChildView.remove`. Doing so allows morphdom to update the DOM efficiently. This keeps morphdom from seeing more additions than is actually necessary.
-### Discreet Event Listeners
+### Discrete Event Listeners
 As an alternative to the complexities of [React's synthetic event system](https://facebook.github.io/react/docs/working-with-the-browser.html), DOM event listeners will continue to reside in  the [view's events](https://github.com/AndrewHenderson/mariodux/blob/master/examples/todos/components/TodoList.js#L30-L32).
 ```js
 events: {
   click: 'onClick'
 }
 ```
-One particular issue that arises when coupling discreet event listeners with DOM diffing is that the DOM node may be presenting data which is not part the view's model.
+One particular issue that arises when coupling discrete event listeners with DOM diffing is that the DOM node may be presenting data which is not part the view's model.
 
 This is most apparent in the provided [async example](https://github.com/AndrewHenderson/mariodux/tree/master/examples/async) where views hold reference to thier `li` nodes whose text may have been replaced by morphdom. At this point, the view's node is presenting data that is not in the view's model.
 
